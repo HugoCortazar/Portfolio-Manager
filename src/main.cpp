@@ -1,23 +1,24 @@
 #include <iostream>
-#include <string>
-#include "Activo.hpp" // 1. ¡Incluye tu nueva clase!
+#include "Accion.hpp"
+#include "Portfolio.hpp" 
+
 
 using namespace std;
 
 int main() {
-    // 2. Crea un objeto (una "instancia") de tu clase
-    //    Esto llama al constructor que definiste
-    Activo miActivo("Acción de Apple (AAPL)", 150.50, 0.15, 0.25);
+    // 1. Creamos un objeto Portfolio 
+    Portfolio miPortfolio;
 
-    // 3. Usa los métodos de la clase
-    //    (Requisito: Lectura/escritura por pantalla)
-    cout << "--- Información del Activo ---" << endl;
-    cout << "Nombre: " << miActivo.getNombre() << endl;
-    cout << "Precio: " << miActivo.getPrecio() << " USD" << endl;
+    
+    Activo* ptrAccion1 = new Accion("Apple (AAPL)", 150.0, 0.1, 0.2, "Tecnología");
+    Activo* ptrAccion2 = new Accion("Coca-Cola (KO)", 60.0, 0.05, 0.1, "Consumo");
+    
+    //    Añadimos los punteros al portfolio
+    miPortfolio.anadirActivo(ptrAccion1);
+    miPortfolio.anadirActivo(ptrAccion2);
 
-    // 4. Modifica el objeto usando un setter
-    miActivo.setPrecio(152.75);
-    cout << "Precio actualizado: " << miActivo.getPrecio() << " USD" << endl;
+    miPortfolio.mostrarPortfolio();
 
-    return 0; // Indica que el programa terminó correctamente
+    cout << "Fin de main. El destructor de Portfolio se llamará ahora." << endl;
+    return 0;
 }

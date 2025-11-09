@@ -1,10 +1,10 @@
-#include "Activo.hpp" // ¡Muy importante incluir tu propia cabecera!
+#include "Activo.hpp"
 
-// Aquí implementamos el constructor
+using namespace std;
+
 // Usamos "Activo::" para indicar que esta función pertenece a la clase Activo
 Activo::Activo(const std::string& nombre, double precio, double retorno, double riesgo) {
-    // 'this->' se usa para diferenciar el miembro de la clase (this->nombre)
-    // del parámetro de la función (nombre)
+
     this->nombre = nombre;
     this->precio = precio;
     this->retornoEsperado = retorno;
@@ -12,7 +12,7 @@ Activo::Activo(const std::string& nombre, double precio, double retorno, double 
 }
 
 // Implementación de los getters
-std::string Activo::getNombre() const {
+string Activo::getNombre() const {
     return this->nombre;
 }
 
@@ -22,7 +22,7 @@ double Activo::getPrecio() const {
 
 // Implementación del setter
 void Activo::setPrecio(double nuevoPrecio) {
-    if (nuevoPrecio >= 0) { // Buena idea añadir validaciones
+    if (nuevoPrecio >= 0) {
         this->precio = nuevoPrecio;
     }
 }
