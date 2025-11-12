@@ -12,3 +12,4 @@ Accion::Accion(const std::string& nombre, double precio, double retorno, double 
 std::string Accion::getSector() const {
     return this->sector;
 }
+
