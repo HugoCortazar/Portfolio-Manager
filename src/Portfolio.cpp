@@ -27,11 +27,15 @@ void Portfolio::anadirActivo(Activo* nuevoActivo) {
 }
 
 // Muestra todos los activos
+// EL REEMPLAZO (CON POLIMORFISMO)
 void Portfolio::mostrarPortfolio() const {
     std::cout << "\n--- === Contenido del Portfolio === ---" << std::endl;
     for (const Activo* activoPtr : this->activos) {
-        std::cout << " - Nombre: " << activoPtr->getNombre();
-        std::cout << " | Precio: " << activoPtr->getPrecio() << std::endl;
+        
+        // ¡AQUÍ OCURRE LA MAGIA!
+        activoPtr->imprimirDetalle(); // <-- ¡Llamada polimórfica!
+
+        std::cout << "-----------------------------------" << std::endl;
     }
     std::cout << "--- =============================== ---" << std::endl;
 }
