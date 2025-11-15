@@ -1,24 +1,18 @@
-#include "Activo.hpp"
-#include <string>
-#include <vector> 
+#pragma once
 
-// Herencia
+#include "Activo.hpp" 
+#include <string>
+
 class ETF : public Activo {
 private:
-    std::string gestora;
-    std::vector<std::string> principalesPosiciones; 
+    std::string index; 
+    std::string pais;  
 
 public:
-    // Constructor de ETF
-    ETF(const std::string& nombre, double precio, double retorno, double riesgo, 
-        const std::string& gestora, const std::vector<std::string>& posiciones);
+    // Constructor
+    ETF(const std::string& nombre, double precio, double retorno, double riesgo, const std::string& index, const std::string& pais);
     
-    // Destructor virtual
-    virtual ~ETF(); 
-
-    // Getters de ETF
-    std::string getGestora() const;
-
-    // Sobrescritura del método virtual para Polimorfismo
-    virtual void imprimirDetalle() const override; 
+    // Getters
+    std::string getIndex() const;
+    std::string getPais() const;
 };

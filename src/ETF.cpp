@@ -1,34 +1,19 @@
 #include "ETF.hpp"
-#include <iostream> // Para std::cout
 
 // Implementación del constructor
-ETF::ETF(const std::string& nombre, double precio, double retorno, double riesgo, 
-         const std::string& gestora, const std::vector<std::string>& posiciones)
-    : Activo(nombre, precio, retorno, riesgo) // <-- Llama al constructor del padre (Activo)
+ETF::ETF(const std::string& nombre, double precio, double retorno, double riesgo, const std::string& index, const std::string& pais)
+    : Activo(nombre, precio, retorno, riesgo) 
 {
-    this->gestora = gestora;
-    this->principalesPosiciones = posiciones;
+
+    this->index = index;
+    this->pais = pais;
 }
 
-// Implementación del destructor
-ETF::~ETF() {
-    // Mensaje para ver cómo se llama (gracias al polimorfismo)
-    std::cout << "Destruyendo ETF: " << this->nombre << std::endl;
+// Implementación de getters
+std::string ETF::getIndex() const {
+    return this->index;
 }
 
-std::string ETF::getGestora() const {
-    return this->gestora;
-}
-
-// [RECOMENDADO] Implementación de la Sobrecarga Dinámica
-void ETF::imprimirDetalle() const {
-    // 1. Llama al método del padre (Activo) para imprimir los datos comunes
-    Activo::imprimirDetalle(); 
-    
-    // 2. Añade la información específica de ETF
-    std::cout << "  Gestora: " << this->gestora << std::endl;
-    std::cout << "  Principales Posiciones:" << std::endl;
-    for (const std::string& pos : principalesPosiciones) {
-        std::cout << "    - " << pos << std::endl;
-    }
+std::string ETF::getPais() const {
+    return this->pais;
 }

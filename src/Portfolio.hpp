@@ -1,24 +1,30 @@
 #pragma once
 
-#include <vector>     
+#include <vector>
 #include <string>
-#include "Activo.hpp" 
+#include "Holding.hpp"
+#include "Trade.hpp" 
 
 class Portfolio {
 private:
-    std::vector<Activo*> activos; 
-    
-    double cantidadTotal; 
+    std::vector<Holding*> holdings; 
+    std::vector<Trade*> historialTrades; 
+    double cantidadTotal;
+
+    // Método "ayudante" privado
+    Holding* encontrarHolding(Activo* activo); 
 
 public:
-    // Constructor
     Portfolio();
-    //Liberamos memoria
-    ~Portfolio();
+    ~Portfolio(); 
+    
+    // Método principal para operar
+    void procesarTrade(Trade* nuevoTrade);
 
-    //Añadir un activo 
-    void anadirActivo(Activo* nuevoActivo);
-
-    //Mostrar los activos del portfolio
+    // Métodos para mostrar información
     void mostrarPortfolio() const;
+    void mostrarHistorialTrades() const; 
+    
+    // Getter para los medidores
+    const std::vector<Holding*>& getHoldings() const;
 };
