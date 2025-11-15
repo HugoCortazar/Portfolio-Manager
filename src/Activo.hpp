@@ -1,29 +1,27 @@
-#pragma once 
-#include <string> 
+#pragma once
+
+#include <string>
+#include "HistoricoPrecios.hpp" // 1. ¡INCLUIR LA NUEVA CLASE!
 
 class Activo {
-// ¡CAMBIADO A PROTECTED!
-// para que las clases hijas (Accion, ETF) puedan ver las variables
-protected:
+private:
     std::string nombre;
     double precio;
     double retornoEsperado;
     double riesgo;
+    
+    // 2. AÑADIR: Cada Activo "posee" su histórico
+    HistoricoPrecios* historico; 
 
 public:
     Activo(const std::string& nombre, double precio, double retorno, double riesgo);
-    
-    // Getters
-    std::string getNombre() const; 
+    virtual ~Activo(); // (Ya deberías tenerlo)
+
+    std::string getNombre() const;
     double getPrecio() const;
-    
-    // Setter
     void setPrecio(double nuevoPrecio);
 
-    // --- ¡MOVIDOS AQUÍ DENTRO DE 'public:'! ---
-    // Destructor virtual (OBLIGATORIO para polimorfismo)
-    virtual ~Activo(); 
-    
-    // Método virtual para Sobrecarga Dinámica
-    virtual void imprimirDetalle() const;
+    // 3. AÑADIR: Métodos para gestionar el histórico
+    void cargarHistorico(const std::string& nombreArchivo);
+    HistoricoPrecios* getHistorico() const;
 };

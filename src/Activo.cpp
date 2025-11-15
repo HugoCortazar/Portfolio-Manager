@@ -1,40 +1,48 @@
 #include "Activo.hpp"
-#include <iostream> // Necesario para std::cout
+#include <iostream> // Asegúrate de que está incluido
 
-using namespace std;
-
-// --- 1. CONSTRUCTOR ---
+// CONSTRUCTOR: Modificar para inicializar el puntero
 Activo::Activo(const std::string& nombre, double precio, double retorno, double riesgo) {
     this->nombre = nombre;
     this->precio = precio;
     this->retornoEsperado = retorno;
     this->riesgo = riesgo;
+    
+    this->historico = nullptr; // ¡MUY IMPORTANTE! Inicializar a 'nada'
 }
 
-// --- 2. GETTERS Y SETTERS ---
-string Activo::getNombre() const {
-    return this->nombre;
+// DESTRUCTOR: Modificar para borrar la memoria del histórico
+Activo::~Activo() {
+    std::cout << "Destruyendo Activo: " << this->nombre << std::endl;
+    
+    // Borramos el histórico que "poseemos"
+    // 'delete' es seguro incluso si 'historico' es 'nullptr'
+    delete this->historico; 
 }
 
-double Activo::getPrecio() const {
-    return this->precio;
-}
+// --- Getters/Setters (sin cambios) ---
+std::string Activo::getNombre() const { return this->nombre; }
+double Activo::getPrecio() const { return this->precio; }
+void Activo::setPrecio(double nuevoPrecio) { /* ... */ }
 
-void Activo::setPrecio(double nuevoPrecio) {
-    if (nuevoPrecio >= 0) {
-        this->precio = nuevoPrecio;
+// --- NUEVOS MÉTODOS ---
+void Activo::cargarHistorico(const std::string& nombreArchivo) {
+    // Si ya teníamos un histórico, lo borramos antes de cargar uno nuevo
+    if (this->historico != nullptr) {
+        delete this->historico;
+    }
+    
+    // Creamos el objeto (memoria dinámica)
+    this->historico = new HistoricoPrecios();
+    
+    // Usamos el objeto para cargar el CSV
+    if (this->historico->cargarDesdeCSV(nombreArchivo)) {
+        std::cout << "Histórico cargado para: " << this->nombre << std::endl;
+    } else {
+        std::cout << "FALLO al cargar histórico para: " << this->nombre << std::endl;
     }
 }
 
-// --- 3. IMPLEMENTACIONES VIRTUALES (SOLO UNA VEZ) ---
-
-Activo::~Activo() {
-    // Destructor virtual necesario para polimorfismo
-    // Mensaje para depurar:
-    std::cout << "Destruyendo Activo: " << this->nombre << std::endl;
-}
-
-void Activo::imprimirDetalle() const {
-    // Implementación base
-    std::cout << "  Nombre: " << this->nombre << " | Precio: " << this->precio << std::endl;
+HistoricoPrecios* Activo::getHistorico() const {
+    return this->historico;
 }
