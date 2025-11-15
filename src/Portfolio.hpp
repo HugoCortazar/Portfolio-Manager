@@ -1,24 +1,21 @@
 #pragma once
 
-#include <vector>     
+#include <vector>
 #include <string>
-#include "Activo.hpp" 
+#include "Holding.hpp" // Ahora incluimos "Holding.hpp" en vez de activo
 
 class Portfolio {
 private:
-    std::vector<Activo*> activos; 
+    // Ya no es un vector de Activo, sino de Holding
+    std::vector<Holding*> holdings; 
     
-    double cantidadTotal; 
+    double cantidadTotal; // Dinero
 
 public:
-    // Constructor
     Portfolio();
-    //Liberamos memoria
-    ~Portfolio();
+    ~Portfolio(); // El destructor ahora borrará los Holdings
 
-    //Añadir un activo 
-    void anadirActivo(Activo* nuevoActivo);
+    void anadirHolding(Holding* nuevoHolding);
 
-    //Mostrar los activos del portfolio
     void mostrarPortfolio() const;
 };

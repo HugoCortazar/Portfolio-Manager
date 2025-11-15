@@ -1,41 +1,39 @@
 #include "Portfolio.hpp"
-#include <iostream> 
+#include <iostream>
 
-// Constructor: Inicializa las variables
 Portfolio::Portfolio() {
     this->cantidadTotal = 0.0;
-    // El vector 'activos' se inicializa vacío por defecto
 }
 
-
+// DESTRUCTOR 
 Portfolio::~Portfolio() {
     std::cout << "\n--- Limpiando memoria del Portfolio ---" << std::endl;
-    // Debemos recorrer el vector y borrar CADA puntero que contiene
-    for (Activo* activoPtr : this->activos) {
-        std::cout << "Liberando: " << activoPtr->getNombre() << std::endl;
-        delete activoPtr; //Libera la memoria
-    }
-    
-}
-
-// Añade un puntero a activo al vector
-void Portfolio::anadirActivo(Activo* nuevoActivo) {
-    if (nuevoActivo != nullptr) {
-        this->activos.push_back(nuevoActivo);
-        std::cout << "Activo añadido: " << nuevoActivo->getNombre() << std::endl;
+    // Recorremos el vector de holdings y borramos CADA holding
+    for (Holding* holdingPtr : this->holdings) {
+        std::cout << "Liberando holding: " << holdingPtr->getActivo()->getNombre() << std::endl;
+        delete holdingPtr; // Esto llamará al destructor de Holding
+                           // que a su vez llamará 'delete' para el Activo
     }
 }
 
-// Muestra todos los activos
-// EL REEMPLAZO (CON POLIMORFISMO)
+// MÉTODO AÑADIR 
+void Portfolio::anadirHolding(Holding* nuevoHolding) {
+    if (nuevoHolding != nullptr) {
+        this->holdings.push_back(nuevoHolding);
+        std::cout << "Holding añadido: " << nuevoHolding->getActivo()->getNombre() << std::endl;
+    }
+}
+
+// MOSTRAR PORTFOLIO 
 void Portfolio::mostrarPortfolio() const {
     std::cout << "\n--- === Contenido del Portfolio === ---" << std::endl;
-    for (const Activo* activoPtr : this->activos) {
-        
-        // ¡AQUÍ OCURRE LA MAGIA!
-        activoPtr->imprimirDetalle(); // <-- ¡Llamada polimórfica!
+    for (const Holding* holdingPtr : this->holdings) {
+        // Para leer los datos del activo, primero lo obtenemos del holding
+        Activo* activoPtr = holdingPtr->getActivo();
 
-        std::cout << "-----------------------------------" << std::endl;
+        std::cout << " - Activo: " << activoPtr->getNombre();
+        std::cout << " | Cantidad: " << holdingPtr->getCantidad(); // Dato del Holding
+        std::cout << " | Precio Act: " << activoPtr->getPrecio() << std::endl;
     }
     std::cout << "--- =============================== ---" << std::endl;
 }
