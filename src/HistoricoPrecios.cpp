@@ -11,7 +11,7 @@ HistoricoPrecios::HistoricoPrecios() {
 
 // Destructor
 HistoricoPrecios::~HistoricoPrecios() {
-    std::cout << "Destruyendo Histórico (" << this->precios.size() << " registros)" << std::endl;
+    std::cout << "Destruyendo Historico (" << this->precios.size() << " registros)" << std::endl;
 }
 
 // Método para cargar el CSV
@@ -38,7 +38,7 @@ bool HistoricoPrecios::cargarDesdeCSV(const std::string& nombreArchivo) {
             this->precios.push_back({fechaStr, precio});
 
         } catch (const std::invalid_argument& e) {
-            std::cerr << "Advertencia: Línea mal formada en CSV: '" << linea << "'" << std::endl;
+            std::cerr << "Advertencia: Linea mal formada en CSV: '" << linea << "'" << std::endl;
         }
     }
 
@@ -48,7 +48,7 @@ bool HistoricoPrecios::cargarDesdeCSV(const std::string& nombreArchivo) {
 
 // Método para mostrar precios
 void HistoricoPrecios::mostrarPrecios() const {
-    std::cout << "\n--- Histórico de Precios Cargado ---" << std::endl;
+    std::cout << "\n--- Historico de Precios Cargado ---" << std::endl;
     for (const auto& registro : this->precios) {
         std::cout << "  Fecha: " << registro.fecha << ", Precio: " << registro.precio << std::endl;
     }
