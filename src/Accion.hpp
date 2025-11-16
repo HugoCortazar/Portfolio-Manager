@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Activo.hpp" 
+#include "Activo.hpp"
 #include <string>
 
-
+// Hereda de Activo
 class Accion : public Activo {
 private:
-    std::string sector; 
+    std::string sector;
 
 public:
-    // El constructor de Accion necesita los datos para sí mismo Y para Activo
+    // El constructor de Accion
     Accion(const std::string& nombre, double precio, double retorno, double riesgo, const std::string& sector);
     
-    // Un getter para la nueva propiedad
+    // Getter específico
     std::string getSector() const;
 };

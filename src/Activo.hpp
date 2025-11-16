@@ -1,26 +1,31 @@
-#pragma once 
+#pragma once
 
-#include <string> 
-
-// Usar 'using namespace std;' en un .hpp es mala práctica.
+#include <string>
+#include "HistoricoPrecios.hpp"
 
 class Activo {
-// metodos privados
 private:
     std::string nombre;
     double precio;
     double retornoEsperado;
     double riesgo;
 
-// Métodos públicos 
-public:
+    HistoricoPrecios* historico; 
 
+public:
     Activo(const std::string& nombre, double precio, double retorno, double riesgo);
-   
-    std::string getNombre() const; 
-    double getPrecio() const;
     
+    virtual ~Activo(); 
+
+    // Getters
+    std::string getNombre() const;
+    double getPrecio() const;
+    HistoricoPrecios* getHistorico() const;
+    double getRetornoEsperado() const;
+
+    // Setters
     void setPrecio(double nuevoPrecio);
 
-
+    // Métodos de acción
+    void cargarHistorico(const std::string& nombreArchivo);
 };
