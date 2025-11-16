@@ -21,10 +21,10 @@ void mostrarMenu() {
     cout << "4. Mostrar Historial de Trades" << endl;
     cout << "5. Calcular Riesgo del Portfolio" << endl;
     cout << "6. Calcular Retorno Esperado (Media)" << endl; 
-    cout << "7. Ver Histórico de Activo" << endl; 
+    cout << "7. Ver Historico de Activo" << endl; 
     cout << "8. Salir" << endl;                 
     cout << "-----------------------------------" << endl;
-    cout << "Elige una opción: ";
+    cout << "Elige una opcion: ";
 }
 
 //Función "Ayudante" para buscar un Activo 
@@ -50,7 +50,7 @@ int main() {
 
     cout << "Cargando activos del mercado..." << endl;
     
-    Activo* ptrAccionAAPL = new Accion("Apple (AAPL)", 175.0, 0.15, 0.2, "Tecnología");
+    Activo* ptrAccionAAPL = new Accion("Apple (AAPL)", 175.0, 0.15, 0.2, "Tecnologia");
     ptrAccionAAPL->cargarHistorico("AAPL.csv");
     activosDisponibles.push_back(ptrAccionAAPL);
     
@@ -76,7 +76,7 @@ int main() {
             //COMPRAR
             string simbolo;
             int cantidad;
-            cout << "Introduce el símbolo (ej: AAPL, KO, VOO, BONO): "; 
+            cout << "Introduce el simbolo (ej: AAPL, KO, VOO, BONO): "; 
             getline(cin, simbolo);
 
             if (simbolo.empty()) {
@@ -101,7 +101,7 @@ int main() {
         else if (opcion == 2) {
             string simbolo;
             int cantidad;
-            cout << "Introduce el símbolo (ej: AAPL, KO, VOO, BONO): ";
+            cout << "Introduce el simbolo (ej: AAPL, KO, VOO, BONO): ";
             getline(cin, simbolo);
             
             if (simbolo.empty()) {
@@ -132,7 +132,7 @@ int main() {
         } 
         else if (opcion == 5) {
             double riesgo = MedidorRiesgo::calcularRiesgoPortfolio(&miPortfolio);
-            cout << "\n--- === Análisis de Riesgo === ---" << endl;
+            cout << "\n--- === Analisis de Riesgo === ---" << endl;
             cout << "Riesgo (StdDev Ponderada): " << riesgo << endl;
         } 
         else if (opcion == 6) {
@@ -145,9 +145,9 @@ int main() {
             cout.unsetf(std::ios_base::floatfield);
         } 
         else if (opcion == 7) {
-            //VER HISTÓRICO
+            //VER HISTORICO
             string simbolo;
-            cout << "Introduce el símbolo del activo (ej: AAPL, KO): ";
+            cout << "Introduce el simbolo del activo (ej: AAPL, KO): ";
             getline(cin, simbolo);
             
             
@@ -160,7 +160,7 @@ int main() {
             if (activo == nullptr) {
                 cout << "Error: Activo no encontrado." << endl;
             } else if (activo->getHistorico() == nullptr) {
-                cout << "Error: Este activo no tiene datos históricos cargados." << endl;
+                cout << "Error: Este activo no tiene datos historicos cargados." << endl;
             } else {
                 activo->getHistorico()->mostrarPrecios();
             }
@@ -170,7 +170,7 @@ int main() {
             cout << "Saliendo... ¡Gracias por usar el gestor!" << endl;
             break; 
         } else {
-            cout << "Opción no válida. Inténtalo de nuevo." << endl;
+            cout << "Opcion no válida. Intentalo de nuevo." << endl;
         }
     }
 

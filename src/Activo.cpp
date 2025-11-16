@@ -48,8 +48,8 @@ void Activo::cargarHistorico(const std::string& nombreArchivo) {
     
     // Usamos el objeto para cargar el CSV
     if (this->historico->cargarDesdeCSV(nombreArchivo)) {
-        std::cout << "Histórico cargado para: " << this->nombre << std::endl;
+        std::cout << "Historico cargado para: " << this->nombre << std::endl;
     } else {
-        std::cout << "FALLO al cargar histórico para: " << this->nombre << std::endl;
+        std::cout << "FALLO al cargar historico para: " << this->nombre << std::endl;
     }
 }

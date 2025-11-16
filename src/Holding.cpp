@@ -43,7 +43,7 @@ void Holding::actualizarConCompra(int cantComprada, double precioCompra) {
 
 void Holding::actualizarConVenta(int cantVendida) {
     if (cantVendida > this->cantidad) {
-        std::cerr << "Advertencia: Se intentó vender más de lo que se posee." << std::endl;
+        std::cerr << "Advertencia: Se intento vender mas de lo que se posee." << std::endl;
         cantVendida = this->cantidad;
     }
     
